@@ -1,0 +1,7 @@
+<br>
+<p>search</p>
+<form #searchForm="ngForm" (change)="updateFilter(searchForm)">
+  <input type="text" name="searchText" ngModel>
+</form>
+<br>
+<app-profile-preview *ngFor="let profile of profilePreviews" [profile]="profile"></app-profile-preview>
