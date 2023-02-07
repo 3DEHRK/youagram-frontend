@@ -1,8 +1,10 @@
-<br>
-<p>name</p>
-<input type="text">
-<br>
-<p>pwd</p>
-<input type="text">
-<br>
-<button>Login</button>
+<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+  <br>
+  <p>name</p>
+  <input type="text" name="username" ngModel>
+  <br>
+  <p>pwd</p>
+  <input type="text" name="password" ngModel>
+  <br>
+  <button type="submit">Login</button>
+</form>

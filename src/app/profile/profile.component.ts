@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute, Route} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 import {ApiService} from "../api.service";
 
 @Component({
@@ -13,7 +13,8 @@ export class ProfileComponent {
   exampleDataPw: string = '';
 
   constructor(private route: ActivatedRoute,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private router: Router) {
 
   }
 
@@ -21,6 +22,8 @@ export class ProfileComponent {
     this.route.params.subscribe(params => {
       this.username = params['id'];
       this.apiService.getProfileByName(this.username).subscribe(res=>{
+        if(!res)
+          this.router.navigateByUrl('');
         //@ts-ignore
         this.exampleDataPw = res.password;
       });
