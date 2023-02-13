@@ -12,6 +12,7 @@ export class HomeComponent {
   constructor(
     private apiService: ApiService
   ) {
+
   }
 
   profilePreviews: any[] = [];
@@ -22,6 +23,7 @@ export class HomeComponent {
       this.allProfilePreviews = Object.values(value);
       this.profilePreviews = this.allProfilePreviews;
     });
+
   }
 
   updateFilter(searchForm: NgForm){

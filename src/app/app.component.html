@@ -2,5 +2,7 @@
 <span routerLink="/">home </span>
 <span routerLink="/login">login </span>
 <span routerLink="/register">register</span>
+<span routerLink="/profile/{{username}}"> | {{username}} </span>
+<button (click)="logout()">Logout</button>
 
 <router-outlet></router-outlet>

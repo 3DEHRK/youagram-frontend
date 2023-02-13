@@ -10,7 +10,9 @@ import {ApiService} from "../api.service";
 export class ProfileComponent {
 
   username: string = '';
-  exampleDataPw: string = '';
+  editable: boolean = false;
+  biography = '';
+  profilePictureLink = '';
 
   constructor(private route: ActivatedRoute,
               private apiService: ApiService,
@@ -18,15 +20,18 @@ export class ProfileComponent {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.params.subscribe(params => {
       this.username = params['id'];
-      this.apiService.getProfileByName(this.username).subscribe(res=>{
-        if(!res)
+      this.apiService.getProfileByName(this.username).subscribe(res => {
+        if (!res)
           this.router.navigateByUrl('');
         //@ts-ignore
-        this.exampleDataPw = res.password;
+        this.biography = res.biography;
+        //@ts-ignore
+        this.profilePictureLink = res.profilePictureLink;
       });
     })
+    this.editable = this.username === this.apiService.username;
   }
 }

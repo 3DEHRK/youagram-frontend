@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgForm} from "@angular/forms";
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,12 @@ import {NgForm} from "@angular/forms";
 })
 export class LoginComponent {
 
+  constructor(private apiService: ApiService) {
+  }
+
   login(loginForm: NgForm){
+    const {username, password} = loginForm.value;
+    this.apiService.login(username, password);
     loginForm.resetForm();
   }
 }
