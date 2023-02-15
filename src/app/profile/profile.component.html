@@ -1,4 +1,4 @@
-<p>profile of {{username}}</p>
-<img src="{{profilePictureLink}}">
-<p>{{biography}}</p>
-<button *ngIf="editable">Edit</button>
+<p>profile of {{profileUsername}}</p>
+<img src="{{profile.profilePictureLink}}">
+<p>{{profile.biography}}</p>
+<button *ngIf="editable" (click)="openEditModal()">Edit</button>

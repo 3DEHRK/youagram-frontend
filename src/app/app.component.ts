@@ -12,7 +12,9 @@ export class AppComponent {
   username = '';
 
   constructor(private apiService: ApiService) {
-    this.username = this.apiService.username;
+    this.apiService.username.subscribe(val=>{
+      this.username = val;
+    });
   }
 
   logout(){

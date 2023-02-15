@@ -1,8 +1,8 @@
 <img src="assets/youagram.png" style="height: 10%; width: 10%">
 <span routerLink="/">home </span>
-<span routerLink="/login">login </span>
-<span routerLink="/register">register</span>
-<span routerLink="/profile/{{username}}"> | {{username}} </span>
-<button (click)="logout()">Logout</button>
+<span *ngIf="username == ''" routerLink="/login">login </span>
+<span *ngIf="username == ''" routerLink="/register">register</span>
+<span *ngIf="username != ''" routerLink="/profile/{{username}}"> | {{username}} </span>
+<button *ngIf="username != ''" (click)="logout()">Logout</button>
 
 <router-outlet></router-outlet>

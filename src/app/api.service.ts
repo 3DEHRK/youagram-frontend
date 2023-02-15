@@ -9,7 +9,7 @@ import jwt_decode from "jwt-decode";
 })
 export class ApiService {
   private token = '';
-  public username = ''; //TODO: fix this bs (async)
+  private username$ = new BehaviorSubject<string>('');
   private jwtToken$ = new BehaviorSubject<string>(this.token);
 
   API_URL = 'http://localhost:3000';
@@ -24,15 +24,27 @@ export class ApiService {
       this.jwtToken$.next(this.token);
     }
 
-    this.jwtToken.subscribe(value => {
+    this.jwtToken$.subscribe(value => {
         //@ts-ignore
-        this.username = jwt_decode(value).username;
+        this.username$.next(jwt_decode(value).username);
       }
     )
   }
 
+  get username(){
+    return this.username$.asObservable();
+  }
+
   get jwtToken(){
     return this.jwtToken$.asObservable();
+  }
+
+  updateProfile(profile: any){
+    return this.http.put(this.API_URL+'/profiles',{profile}, {
+      headers:{
+        Bearer: this.token
+      }
+    });
   }
 
   getProfiles(){
@@ -40,7 +52,9 @@ export class ApiService {
   }
 
   createProfile(username: string, password: string){
-    return this.http.put(this.API_URL+'/auth/register', {username, password}).subscribe();
+    return this.http.put(this.API_URL+'/auth/register', {username, password}).subscribe(res=>{
+      this.jwtLogin(res);
+    });
   }
 
   getProfileByName(username: string){
@@ -50,23 +64,26 @@ export class ApiService {
   login(username: string, password: string){
     return this.http.post(this.API_URL+'/auth/login', {username, password})
       .subscribe(res=>{
-
-        //@ts-ignore
-        this.token = res.token;
-
-        if(this.token){
-          this.jwtToken$.next(this.token);
-          localStorage.setItem('act', window.btoa(this.token))
-          this.router.navigateByUrl('/');
-        }
+        this.jwtLogin(res);
       });
+  }
+
+  jwtLogin(res: any){
+    //@ts-ignore
+    this.token = res.token;
+
+    if(this.token){
+      this.jwtToken$.next(this.token);
+      localStorage.setItem('act', window.btoa(this.token))
+      this.router.navigateByUrl('/');
+    }
   }
 
   logout(){
     localStorage.removeItem('act');
     this.token = '';
-    this.username = '';
+    this.username$.next('');
     this.jwtToken$.next(this.token);
-    this.router.navigateByUrl('/login');
+    //this.router.navigateByUrl('/login');
   }
 }
