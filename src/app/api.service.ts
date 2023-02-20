@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import jwt_decode from "jwt-decode";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class ApiService {
   API_URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient,
-              private router: Router
+              private router: Router,
+              private toastr: ToastrService
   ) {
     const fetchedToken = localStorage.getItem('act');
 
@@ -54,6 +56,8 @@ export class ApiService {
   createProfile(username: string, password: string){
     return this.http.put(this.API_URL+'/auth/register', {username, password}).subscribe(res=>{
       this.jwtLogin(res);
+    }, (err: HttpErrorResponse)=>{
+      this.toastr.error(err.error.message);
     });
   }
 
@@ -65,6 +69,8 @@ export class ApiService {
     return this.http.post(this.API_URL+'/auth/login', {username, password})
       .subscribe(res=>{
         this.jwtLogin(res);
+      }, (err: HttpErrorResponse)=>{
+        this.toastr.error(err.error.message);
       });
   }
 

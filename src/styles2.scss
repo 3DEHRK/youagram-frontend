@@ -1,2 +1,2 @@
-/*@import 'ngx-toastr/toastr-bs5-alert';
-todo: cant be used because bootstrap is included as css and not sass.. maybe fix later*/
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+@import 'ngx-toastr/toastr-bs5-alert';
