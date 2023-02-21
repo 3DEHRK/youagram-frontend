@@ -31,7 +31,8 @@ import {ToastrModule} from "ngx-toastr";
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      timeOut: 2000
+      timeOut: 2000,
+      positionClass: 'toast-top-center'
     })
   ],
   providers: [],

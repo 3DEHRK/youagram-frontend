@@ -1,8 +1,45 @@
-<img src="assets/youagram.png" style="height: 10%; width: 10%">
-<span routerLink="/">home </span>
-<span *ngIf="username == ''" routerLink="/login">login </span>
-<span *ngIf="username == ''" routerLink="/register">register</span>
-<span *ngIf="username != ''" routerLink="/profile/{{username}}"> | {{username}} </span>
-<button *ngIf="username != ''" (click)="logout()">Logout</button>
+<html>
+  <header class="mb-3">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-bottom">
 
-<router-outlet></router-outlet>
+        <div class="d-flex justify-content-around align-items-center m-1 px-5">
+          <img routerLink="/" class="bi me-2" width="80" height="80" role="img" aria-label="Bootstrap" src="assets/youagram.png">
+          <span class="fs-4" routerLink="/">Youagram</span>
+        </div>
+
+        <div *ngIf="username == ''" class="d-flex justify-content-around align-items-center m-1 px-5">
+          <button routerLink="/login" type="button" class="btn btn-primary me-2">Login</button>
+          <button routerLink="/register" type="button" class="btn btn-outline-primary">Sign-up</button>
+        </div>
+
+        <div *ngIf="username != ''" class="d-flex justify-content-around align-items-center m-1 px-5">
+          <button class="btn btn-primary m-2" routerLink="/profile/{{username}}">{{username}}</button>
+          <button (click)="logout()" type="button" class="btn btn-outline-primary">Sign out</button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="container" style="min-height: 60vh; display: flex; justify-content: center">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mt-5">
+      <div class="col-md-4 d-flex align-items-center">
+        <a routerLink="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <img src="assets/youagram.png" class="bi" width="40" height="40">
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">&copy; 2023 - Laurin Zoss - laurinzoss@gmail.com</span>
+      </div>
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" target="_blank" href="https://getbootstrap.com/"><img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo-shadow.png" class="bi" width="40" height="30"></a></li>
+        <li class="ms-3"><a class="text-muted" target="_blank" href="https://angular.io/"><img src="https://angular.io/assets/images/logos/angular/angular.svg" class="bi" width="30" height="30"></a></li>
+        <li class="ms-3"><a class="text-muted" target="_blank" href="https://nestjs.com/"><img src="https://d33wubrfki0l68.cloudfront.net/e937e774cbbe23635999615ad5d7732decad182a/26072/logo-small.ede75a6b.svg" class="bi" width="30" height="30"></a></li>
+        <li class="ms-3"><a class="text-muted" target="_blank" href="https://www.mysql.com/"><img src="https://icon-library.com/images/mysql-icon/mysql-icon-3.jpg" class="bi" width="30" height="30"></a></li>
+      </ul>
+    </footer>
+  </div>
+</html>

@@ -1,2 +1,12 @@
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import 'ngx-toastr/toastr-bs5-alert';
+.toast-top-center{
+  top: 32px;
+}
+.card{
+  --bs-card-border-color: #adb5bd;
+  --bs-card-border-radius:0.5rem;
+  --bs-card-inner-border-radius:calc(0.5rem - 1px);
+  --bs-card-color: null;
+  --bs-card-bg: null;
+}

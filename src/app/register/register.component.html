@@ -1,13 +1,25 @@
-<form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
-  <br>
-  <p>name</p>
-  <input type="text" name="username" ngModel>
-  <br>
-  <p>pwd</p>
-  <input type="text" name="password" ngModel>
-  <br>
-  <p>pwd confirm</p>
-  <input type="text" name="passwordConfirm" ngModel>
-  <br>
-  <button type="submit">Register</button>
-</form>
+<body class="text-center">
+
+<main class="form-signin w-100 m-auto">
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+
+    <h1 class="h3 mb-5 fw-normal" style="color: white">Register</h1>
+
+    <div class="form-floating mb-4">
+      <input type="username" class="form-control" id="floatingInput" placeholder="johnny cash" name="username" ngModel>
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating mb-4">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" ngModel>
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="form-floating mb-4">
+      <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Password" name="passwordConfirm" ngModel>
+      <label for="floatingPasswordConfirm">Confirm password</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary mt-5" type="submit">Sign-up</button>
+  </form>
+</main>
+
+</body>

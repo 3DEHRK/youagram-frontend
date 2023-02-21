@@ -1,6 +1,10 @@
-<p>search</p>
-<form #searchForm="ngForm" (change)="updateFilter(searchForm)">
-  <input type="text" name="searchText" ngModel>
-</form>
-<br>
-<app-profile-preview *ngFor="let profile of profilePreviews" [profile]="profile"></app-profile-preview>
+<div class="text-center m-4">
+  <h1 class="h3 mb-4 fw-normal" style="color: white">Find Profiles</h1>
+  <form style="width: 100%" class="col-12 col-lg-auto mb-5 me-lg-3" role="search" #searchForm="ngForm" (change)="updateFilter(searchForm)">
+    <input style="width: 100%" placeholder="Search..." type="search" class="form-control" aria-label="Search" name="searchText" ngModel>
+  </form>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <app-profile-preview *ngFor="let profile of profilePreviews" [profile]="profile"></app-profile-preview>
+</div>

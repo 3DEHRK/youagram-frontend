@@ -6,11 +6,5 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./profile-preview.component.css']
 })
 export class ProfilePreviewComponent {
-
   @Input() profile: any;
-  username: string = '';
-
-  ngOnInit(){
-    this.username = this.profile.username;
-  }
 }

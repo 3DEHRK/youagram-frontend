@@ -1,1 +1,9 @@
-<p [routerLink]="['/profile', username]">{{username}}</p>
+<div class="col">
+  <div class="card h-100" [routerLink]="['/profile', profile.username]">
+    <img src="{{profile.profilePictureLink}}" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">{{profile.username}}</h5>
+      <p class="card-text">{{profile.biography}}</p>
+    </div>
+  </div>
+</div>

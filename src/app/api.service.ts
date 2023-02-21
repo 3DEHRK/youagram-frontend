@@ -57,7 +57,8 @@ export class ApiService {
     return this.http.put(this.API_URL+'/auth/register', {username, password}).subscribe(res=>{
       this.jwtLogin(res);
     }, (err: HttpErrorResponse)=>{
-      this.toastr.error(err.error.message);
+      if(err.status == 409 || err.status == 406)
+        this.toastr.error(err.error.message);
     });
   }
 
@@ -70,7 +71,8 @@ export class ApiService {
       .subscribe(res=>{
         this.jwtLogin(res);
       }, (err: HttpErrorResponse)=>{
-        this.toastr.error(err.error.message);
+        if(err.status == 401)
+          this.toastr.error(err.error.message);
       });
   }
 
