@@ -20,7 +20,7 @@ export class RegisterComponent {
       this.apiService.createProfile(username, password);
     }else{
       this.toastrService.error("Passwords don't match");
-      registerForm.resetForm();
+      //registerForm.resetForm();
     }
   }
 }

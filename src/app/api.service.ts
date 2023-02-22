@@ -46,19 +46,40 @@ export class ApiService {
       headers:{
         Bearer: this.token
       }
-    });
+    }).subscribe(res=>{
+      this.toastr.success(res.toString());
+    },(err: HttpErrorResponse)=> {
+        if (err.status == 406)
+          this.toastr.error(err.error.message);
+      });
   }
+
+  addLink(url: string, title: string) {
+    return this.http.post(this.API_URL+'/content/link', {url, title}, {
+      headers:{
+        Bearer: this.token
+      }
+    }).subscribe();
+  }
+
+  getLinks(username: string){
+    return this.http.get(this.API_URL+'/content/link/'+username);
+  }
+
+  //TODO: auto-send bearer token
 
   getProfiles(){
     return this.http.get(this.API_URL+'/profiles');
   }
 
   createProfile(username: string, password: string){
-    return this.http.put(this.API_URL+'/auth/register', {username, password}).subscribe(res=>{
+    return this.http.post(this.API_URL+'/auth/register', {username, password}).subscribe(res=>{
       this.jwtLogin(res);
     }, (err: HttpErrorResponse)=>{
-      if(err.status == 409 || err.status == 406)
+      if(err.status == 406)
         this.toastr.error(err.error.message);
+      if(err.status == 409)
+        this.toastr.warning(err.error.message);
     });
   }
 

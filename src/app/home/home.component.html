@@ -1,7 +1,7 @@
-<div class="text-center m-4">
+<div class="text-center">
   <h1 class="h3 mb-4 fw-normal" style="color: white">Find Profiles</h1>
-  <form style="width: 100%" class="col-12 col-lg-auto mb-5 me-lg-3" role="search" #searchForm="ngForm" (change)="updateFilter(searchForm)">
-    <input style="width: 100%" placeholder="Search..." type="search" class="form-control" aria-label="Search" name="searchText" ngModel>
+  <form style="width: 100%" class="col-12 col-lg-auto mb-5 me-lg-3" role="search" #searchForm="ngForm" (keyup)="updateFilter(searchForm)">
+    <input style="width: 30%; min-width: 200px" placeholder="Search..." type="search" class="form-control m-auto" aria-label="Search" name="searchText" ngModel>
   </form>
 </div>
 

@@ -23,11 +23,11 @@ export class HomeComponent {
       this.allProfilePreviews = Object.values(value);
       this.profilePreviews = this.allProfilePreviews;
     });
-
   }
 
   updateFilter(searchForm: NgForm){
+    let search = searchForm.value.searchText.toLowerCase();
     this.profilePreviews = this.allProfilePreviews
-      .filter(i => i.username.includes(searchForm.value.searchText));
+      .filter(i => i.username.toLowerCase().includes(search));
   }
 }

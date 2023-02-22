@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {ApiService} from "../api.service";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'modal-content',
@@ -61,7 +61,7 @@ export class ModalContent{
 export class ProfileComponent {
   profileUsername: string = '';
   editable: boolean = false;
-  testIcon: string = '';
+  links: any = [];
 
   public profile = {
     biography: '',
@@ -83,11 +83,9 @@ export class ProfileComponent {
           this.router.navigateByUrl('');
         //@ts-ignore
         this.profile = res;
-
-        //TODO: TEST
-        let manipulate = this.profile.profilePictureLink;
-        let index = manipulate.slice(8).indexOf('/')+9;
-        this.testIcon = manipulate.slice(0,index)+'favicon.ico';
+      });
+      this.apiService.getLinks(this.profileUsername).subscribe(res=>{
+        this.links = res; //Object.values()?
       });
     })
     this.apiService.username.subscribe(val=>{
@@ -100,7 +98,11 @@ export class ProfileComponent {
     modalRef.componentInstance.profile = Object.assign({}, this.profile);
     modalRef.componentInstance.passProfile.subscribe((value: any)=>{
       this.profile = value;
-      this.apiService.updateProfile(this.profile).subscribe();
+      this.apiService.updateProfile(this.profile);
     })
+  }
+
+  addLink(addLinkForm: NgForm){
+    this.apiService.addLink(addLinkForm.value.url,addLinkForm.value.title);
   }
 }

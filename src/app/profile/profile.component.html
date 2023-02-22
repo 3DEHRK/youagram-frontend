@@ -1,7 +1,12 @@
 <div class="text-center">
+  <app-link *ngFor="let link of links" [link]="link"></app-link>
+  <form *ngIf="editable" #addLinkForm="ngForm" (ngSubmit)="addLink(addLinkForm)">
+    <input name="title" placeholder="Title" ngModel>
+    <input name="url" placeholder="URL" ngModel>
+    <button class="btn btn-danger" type="submit">Add Link</button>
+  </form>
   <button *ngIf="editable" (click)="openEditModal()" class="btn btn-warning">Edit Your Profile</button>
   <h1>{{profileUsername}}</h1>
   <h5>{{profile.biography}}</h5>
   <img src="{{profile.profilePictureLink}}" style="max-width: 100%; max-height: 100%">
-  <img src="{{testIcon}}">
 </div>
