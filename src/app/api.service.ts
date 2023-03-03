@@ -66,6 +66,14 @@ export class ApiService {
     return this.http.get(this.API_URL+'/content/link/'+username);
   }
 
+  deleteLink(id: number) {
+    return this.http.delete(this.API_URL+'/content/link/'+id, {
+      headers:{
+        Bearer: this.token
+      }
+    }).subscribe();
+  }
+
   //TODO: auto-send bearer token
 
   getProfiles(){
