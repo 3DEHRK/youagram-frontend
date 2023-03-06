@@ -1,5 +1,5 @@
 <div class="text-center">
-  <app-link *ngFor="let link of links" [link]="link"></app-link>
+  <app-link *ngFor="let link of links" [link]="link" [editable]="editable"></app-link>
   <form *ngIf="editable" #addLinkForm="ngForm" (ngSubmit)="addLink(addLinkForm)">
     <input name="title" placeholder="Title" ngModel>
     <input name="url" placeholder="URL" ngModel>

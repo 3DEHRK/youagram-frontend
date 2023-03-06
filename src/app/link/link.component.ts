@@ -14,6 +14,8 @@ export class LinkComponent {
   @Input() link: any;
   faviconUrl = '';
 
+  @Input() editable: boolean = true;
+
   ngOnInit(){
     let manipulate = this.link.url;
     let index = manipulate.slice(8).indexOf('/')+9;
